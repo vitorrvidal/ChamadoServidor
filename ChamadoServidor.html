@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Gerar chamado servidor</title>
+</head>
+
+<body>
+
+	<div class="topo">
+		<h1 class="titulo">Script - Gerar chamado de servidor</h2>
+			
+			<h3>Informe o motivo na qual está abrindo o chamado para instalação de servidor</h3>
+
+			<p><input id="motivo" name="radioMotivo" required="required" type="radio" value="Banco Corrompido"
+					onclick="bloquearDiv('trocaMaquina')" />Banco Corrompido
+				<input id="motivo" name="radioMotivo" required="required" type="radio" value="Troca de Maquina"
+					onclick="desbloquearDiv('trocaMaquina')" />Troca de Maquina/Reinstalação
+			</p>
+			<div id="trocaMaquina" style="display:none;">
+				<h3>Descreva o motivo pelo qual o(a) cliente deseja trocar seu servidor de maquina ou reinstalar:</h3>
+				<input maxlength="200" id="txtTrocaMaquina" name="txtTrocaMaquina" size="75" type="text" />
+			</div>
+
+			<h3>A Loja encontra-se parada?</h3>
+			<p><input id="lojaParada" name="radioLojaParada" required="required" type="radio" value="Sim" />Sim
+				<input id="lojaParada" name="radioLojaParada" required="required" type="radio" value="Não" />Não
+			</p>
+
+			<h3>Selecione o sistema operacional</h3>
+
+			<p><input id="sistemaOp" name="radioSistema" required="required" type="radio"
+					onclick="desbloquearDiv('sistLinux')" value="Linux" />Linux
+				<input id="sistemaOp" name="radioSistema" required="required" type="radio"
+					onclick="bloquearDiv('sistLinux')" value="Windows" />Windows
+			</p>
+
+			<div id="sistLinux" style="display:none;">
+				<p>Usuario: <input maxlength="55" id="txtUserLinux" name="txtUserLinux" size="55" type="text" /><br />
+				<p>Senha: <input maxlength="55" id="txtPassLinux" name="txtPassLinux" size="55" type="text" /></p>
+			</div>
+
+			<h3>Multi loja?</h3>
+
+			<p><input id="multiLoja" name="radioMultiLoja" required="required" type="radio" value="Sim"
+					onclick="desbloquearDiv('localcentral')" />Sim
+				<input id="multiLoja" name="radioMultiLoja" required="required" type="radio" value="Não"
+					onclick="bloquearDiv('localcentral')" />Não
+			</p>
+
+			<div id="localcentral" style="display:none;">
+				<font size="4px">Qual servidor?
+					<input id="localcentral" name="radioLocalcentral" required="required" type="radio"
+						value="Central" />Central
+					<input id="localcentral" name="radioLocalcentral" required="required" type="radio"
+						value="Local" />Local
+				</font>
+			</div>
+
+			<h3>Caso o servidor tenha sido formatado, informe o caminho do backup, e pasta mysql<br />
+				Ou, caso seja multi loja, informar o caminho do backup + .info do servidor central</h3>
+
+			<p><input maxlength="150" id="txtBkp" name="textBkp" size="80" type="text" /></p>
+	</div>
+
+	<h3>Caixa?</h3>
+	<p><input id="radioCaixa" name="radioCaixa" required="required" type="radio" value="Sim"
+			onclick="desbloquearDiv('docfiscalDiv')" />Sim
+		<input id="radioCaixa" name="radioCaixa" required="required" type="radio" value="Não"
+			onclick="bloquearDiv('docfiscalDiv'); bloquearDiv('satDiv'), bloquearDiv('nfceDiv')" />Não
+	</p>
+
+	<div id="docfiscalDiv" style="display:none;">
+		<h3>Selecione o documento fiscal ativo</h3>
+		<p><input id="docFiscal" name="docFiscal" required="required" type="radio" value="SAT"
+				onclick="desbloquearDiv('satDiv'); bloquearDiv('nfceDiv')" />SAT
+			<input id="docFiscal" name="docFiscal" required="required" type="radio" value="NFCe"
+				onclick="desbloquearDiv('nfceDiv'); bloquearDiv('satDiv')" />NFC-e
+		</p>
+	</div>
+
+
+
+	<div id="satDiv" style="display:none;">
+		<h3>SAT</h3>
+
+		<p><input id="sat" name="sat" required="required" type="radio" value="Sat Novo" onclick="desbloquearDiv('satNovoDiv')" />SAT Novo<input id="sat" name="sat" required="required" type="radio" value="Reinstalação" onclick="bloquearDiv('satNovoDiv')" />SAT Reinstalação</p>
+			<div id="satNovoDiv" style="display:none;">
+				<p> SAT já vinculado na SEFAZ?
+				<p><input id="vinculo" name="vinculo" required="required" type="radio" value="Sim" />Sim <input id="vinculo" name="vinculo"
+					required="required" type="radio" value="Não" />Não</p>
+			</div>
+		<p>Marca: <input maxlength="55" id="txtMarcaSAT" name="txtMarcaSAT" size="55" type="text" /><br />
+		<p>Modelo: <input maxlength="55" id="txtModeloSAT" name="txtModeloSAT" size="55" type="text" /><br />
+		<p>Codigo de ativação: <input maxlength="55" id="txtCodAtivacaoSAT" name="txtCodAtivacaoSAT" size="55"
+				type="text" /></p>
+
+		<h4>Impressora</h4>
+		<p>Marca: <input maxlength="55" id="txtImpressoraMarcaSat" name="txtImpressoraMarcaSat" size="55" type="text" /><br />
+		<p>Modelo: <input maxlength="55" id="txtImpressoraModeloSat" name="txtImpressoraModeloSat" size="55"
+				type="text" /><br /> </p>
+
+		<h4>NF-e</h4>
+		<p>Caminho do certificado: <input maxlength="55" id="txtNfeCertificado" name="txtNfeCertificado" size="55"
+				type="text" /><br />
+		<p>Senha do certificado: <input maxlength="55" id="txtNfeCertificadoSenha" name="txtNfeCertificadoSenha"
+				size="55" type="text" /></p>
+
+	</div>
+
+	<div id="nfceDiv" style="display:none;">
+
+		<h4>Impressora</h4>
+		<p>Marca: <input maxlength="55" id="txtImpressoraNfceMarca" name="txtImpressoraNfceMarca" size="55"
+				type="text" /><br />
+		<p>Modelo: <input maxlength="55" id="txtImpressoraNfceModel" name="txtImpressoraNfceModel" size="55"
+				type="text" /><br /> </p>
+
+		<h4>NFCe</h4>
+		<p>Caminho do certificado: <input maxlength="55" id="txtCertificadoCaminho" name="txtCertificadoCaminho"
+				size="55" type="text" /><br />
+		<p>Senha do certificado: <input maxlength="55" id="txtCertificadoSenha" name="txtCertificadoSenha" size="55"
+				type="text" /></p>
+
+		</div>
+
+	
+
+
+	<h3>Dados</h3>
+
+	<h4>CNPJ da loja solicitante: <input maxlength="14" id="txtCnpjSolicitante" name="txtCnpjSolicitante"
+			required="required" size="30" type="text" /></h4>
+
+	<h4>Versão atual: <input maxlength="8" id="txtVersao" name="txtVersao" size="20" type="text" /></h4>
+
+	<h4>Responsável pelo chamado: <input maxlength="30" id="txtNomeSolicitante" name="txtNomeSolicitante"
+			required="required" size="30" type="text" /></h4>
+
+	<h4>Telefone para contato: <input id="txtTelefone" name="txtTelefone" required="required" size="25" type="tel" />
+	</h4>
+
+	<h4>Conexões (preferencia para teamviewer VSM):</h4>
+	<p>Caso haja necessidade, utilizar a caixa de texto para informações extras além das conexões.</p>
+	<p><textarea cols="60" id="txtConexoes" name="txtConexoes" required="required" rows="5"></textarea></p>
+
+	<div class="botoes">
+		<input name="submit" type="button" value="Gerar" onclick="gerar()">
+		<input name="submit" type="button" value="Limpar" onclick="limpar()">
+	</div>
+
+	<div id="result">
+		<ul id="carregar" style="list-style-type: none;"></ul>
+	</div>
+</body>
+
+<footer class="fixarRodape">
+	<hr />
+	<div>
+		Equipe CHAMADOS VSM.
+	</div>
+</footer>
+
+
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+
+	function bloquearDiv(el) {
+		var display = document.getElementById(el).style.display;
+		if (display == "block")
+			document.getElementById(el).style.display = 'none';
+
+	}
+
+	function desbloquearDiv(el) {
+		var display = document.getElementById(el).style.display;
+		if (display == "none")
+			document.getElementById(el).style.display = 'block';
+	}
+
+
+	function limpar() {
+		window.location.reload()
+	}
+
+
+	function limparDiv(ElementID) {
+		let limparDiv = document.getElementById(ElementID);
+		limparDiv.innerText = " ";
+	}
+
+	function gerar() {
+
+		limparDiv('carregar');
+
+		//dados referente ao titulo
+		var motivo = document.querySelector('input[id="motivo"]:checked');
+		var troca = document.getElementById("txtTrocaMaquina");
+
+		var lojaParada = document.querySelector('input[id="lojaParada"]:checked');
+
+		//dados referente ao tipo de S.O
+		var sist = document.querySelector('input[id="sistemaOp"]:checked');
+		var userL = document.getElementById("txtUserLinux");
+		var passL = document.getElementById("txtPassLinux");
+
+		var mLoja = document.querySelector('input[id="multiLoja"]:checked');
+		var localCentral = document.querySelector('input[id="localcentral"]:checked');
+		var backup = document.getElementById("txtBkp");
+
+		var caixa = document.querySelector('input[id="radioCaixa"]:checked');
+		var docFiscal = document.querySelector('input[id="docFiscal"]:checked');
+
+		var satDoc = document.querySelector('input[id="sat"]:checked');
+		var satVinculo = document.querySelector('input[id="vinculo"]:checked');
+
+		//dados referente ao sat
+		var marcaSat = document.getElementById("txtMarcaSAT");
+		var modelSat = document.getElementById("txtModeloSAT");
+		var codeSat = document.getElementById("txtCodAtivacaoSAT");
+
+		//dados referente a nfe
+		var certCaminhoNfe = document.getElementById("txtNfeCertificado");
+		var certPassNfe = document.getElementById("txtNfeCertificadoSenha");
+
+		//dados referente a impressora
+		var marcaImp = document.getElementById("txtImpressoraMarcaSat");
+		var modelImp = document.getElementById("txtImpressoraModeloSat");
+
+		//dados referente NFCe
+
+
+		var marcaImpNfce = document.getElementById("txtImpressoraNfceMarca");
+		var modelImpNfce = document.getElementById("txtImpressoraNfceModel");
+
+		var certCaminho = document.getElementById("txtCertificadoCaminho");
+		var certPass = document.getElementById("txtCertificadoSenha");
+
+		//carregar a div para exibição do resultado
+		var p = document.getElementById('carregar');
+
+		//dados cadastrais
+		var cnpjSolicitante = document.getElementById("txtCnpjSolicitante");
+		var versao = document.getElementById("txtVersao");
+		var nomeSolicitante = document.getElementById("txtNomeSolicitante");
+		var telefone = document.getElementById("txtTelefone");
+		var conexao = document.getElementById("txtConexoes");
+
+		//criando um elemento
+		var elementTitulo = document.createElement('elementTitulo');
+		var elementTexto = document.createElement('elementTexto');
+		var elementTexto1 = document.createElement('elementTexto1');
+		var elementTexto2 = document.createElement('elementTexto2');
+		var elementOne = document.createElement('elementOne');
+		var elementTwo = document.createElement('elementTwo');
+
+		//impressão titulo chamado
+		if (!motivo || !lojaParada) {
+			return alert("Por favor, preencha os campos");
+		} else if (motivo.value == "Troca de Maquina") {
+			if (troca.value != "") {
+				if (lojaParada.value == 'Sim') {
+				elementTexto1.innerHTML = '<br>TITULO DO CHAMADO - COLOCAR NA DESCRIÇÃO E NÃO NA INTERAÇÃO.';
+				elementTitulo.innerHTML = '<br>Titulo: LOJA PARADA - TROCAR SERVIDOR DE MAQUINA.';
+				elementTexto2.innerHTML = '<br><br>COPIAR E COLAR NA INTERAÇÃO EM MODO RESTRITO';
+				elementTexto.innerHTML = '<br>Motivo: ' + troca.value;
+					//p.appendChild(elementTitulo);
+				} else {
+				elementTexto1.innerHTML = '<br>TITULO DO CHAMADO - COLOCAR NA DESCRIÇÃO E NÃO NA INTERAÇÃO.';
+				elementTitulo.innerHTML = '<br>Titulo: TROCAR SERVIDOR DE MAQUINA.';
+				elementTexto2.innerHTML = '<br><br>COPIAR E COLAR NA INTERAÇÃO EM MODO RESTRITO';
+				elementTexto.innerHTML = '<br>Motivo: ' + troca.value;
+				}
+			} else {
+				return alert("Por favor, informe o motivo do chamado.");
+			}
+		} else {
+			if (lojaParada.value == "Sim") {
+				elementTexto1.innerHTML = '<br>TITULO DO CHAMADO - COLOCAR NA DESCRIÇÃO E NÃO NA INTERAÇÃO.';
+				elementTitulo.innerHTML = '<br>Titulo: LOJA PARADA - BANCO CORROMPIDO.';
+				elementTexto2.innerHTML = '<br><br>COPIAR E COLAR NA INTERAÇÃO EM MODO RESTRITO';
+				//p.appendChild(elementTitulo);
+			} else {
+				elementTexto1.innerHTML = '<br>TITULO DO CHAMADO - COLOCAR NA DESCRIÇÃO E NÃO NA INTERAÇÃO.';
+				elementTitulo.innerHTML = '<br>Titulo: BANCO CORROMPIDO.';
+				elementTexto2.innerHTML = '<br><br>COPIAR E COLAR NA INTERAÇÃO EM MODO RESTRITO';
+				//p.appendChild(elementTitulo);
+			}
+		}
+
+
+		//p.appendChild(elementTitulo);
+
+		//impressão primeiro elemento
+		if (!sist || !mLoja) {
+			return alert("Por favor, preencha todos os campos (Sistema operacinal e/ou Multi Loja).");
+		} if (sist.value == "Linux") {
+			if (userL.value != "" && passL.value != "") {
+				if (!localCentral) {
+						return alert("Por favor, informe se será servidor CENTRAL ou LOCAL.");
+					} else {
+						elementOne.innerHTML = '<br>Sistema Operacional: ' + sist.value + '<br>Usuário Linux: ' + userL.value + '<br>Senha Linux: ' + passL.value + '<br>Multi Loja? ' + mLoja.value + '<br>Servidor: ' + localCentral.value + '<br>Caminho do backup: ' + backup.value;
+						//p.appendChild(elementOne);
+					} 
+				
+			} else {
+					return alert("Por favor, informe os dados de acesso do LINUX");
+					}	
+		} else {
+			if (mLoja.value == "Sim") {
+					if (!localCentral){
+						return alert("Por favor, informe se será servidor CENTRAL ou LOCAL.");
+					} else {
+						elementOne.innerHTML = '<br>Sistema Operacional: ' + sist.value + '<br>Multi Loja? ' + mLoja.value + '<br>Servidor: ' + localCentral.value + '<br>Caminho do backup: ' + backup.value;
+						//p.appendChild(elementOne);
+					} 
+				} else {
+					elementOne.innerHTML = '<br>Sistema Operacional: ' + sist.value + '<br>Multi Loja? ' + mLoja.value + '<br>Caminho do backup: ' + backup.value;
+					//p.appendChild(elementOne);
+					}
+		}
+		
+
+		//impressão segundo elemento
+		if (!caixa){
+			return alert ("Por favor, opção CAIXA não pode ser vazia.");
+		} else if (caixa.value == "Não"){
+			elementTwo.innerHTML = '<br><br>Caixa? ' + caixa.value + '<br><br>CNPJ da loja solicitante: ' + cnpjSolicitante.value + '<br>Responsável pela abertura do chamado: ' + nomeSolicitante.value + '<br>Versão do sistema: ' + versao.value + '<br>Telefone para contato (solicitar ao cliente): ' + telefone.value + '<br><br>Conexões: ' + conexao.value;
+			//p.appendChild(elementTwo);
+		} else {
+			if (!docFiscal){
+				return alert ("Por favor, preencha o Documento Fiscal do cliente.");
+			} else { //aqui começa a impressão nfceE ou SAT
+				if (docFiscal.value == "NFCe"){
+					if(marcaImpNfce.value != "" && modelImpNfce.value != ""){
+								elementTwo.innerHTML = '<br><br>Caixa? ' + caixa.value + '<br><br>Documento fiscal: ' + docFiscal.value + '<br>Marca impressora: ' + marcaImpNfce.value + '<br>Modelo impressora: ' + modelImpNfce.value + '<br><br>Certificado para emissão de NFCe/NFe <br>Caminho do certificado: ' + certCaminho.value + '<br>Senha: ' + certPass.value + '<br><br>CNPJ da loja solicitante: ' + cnpjSolicitante.value + '<br>Responsável pela abertura do chamado: ' + nomeSolicitante.value + '<br>Versão do sistema: ' + versao.value + '<br>Telefone para contato (solicitar ao cliente): ' + telefone.value + '<br><br>Conexões: ' + conexao.value;
+							} else {
+								return alert("Por favor, preencha a MARCA e MODELO da impressora.");
+							}
+				//p.appendChild(elementTwo);
+			//else para o sat
+							
+				} else {
+					if (satDoc == null){
+							return alert ("Por favor, informe a situação do SAT, novo, ou apenas reinstalação.");						
+					} else if (satDoc.value == "Sat Novo"){
+						if(satVinculo == null){
+							return alert("Por favor, informe se o SAT ja se encontra vinculado a SEFAZ.");
+						} else {
+							if(marcaSat.value != "" && modelSat.value != "" && codeSat.value != "" ){
+							elementTwo.innerHTML = '<br><br>Caixa? ' + caixa.value + '<br><br>Documento fiscal: ' + docFiscal.value + '<br>Equipamento novo ou apenas reinstalação? ' + satDoc.value + '<br>SAT Vinculado na SEFAZ? ' + satVinculo.value + '<br><br>Marca: ' + marcaSat.value + '<br>Modelo: ' + modelSat.value + '<br>Código de ativação: ' + codeSat.value + '<br><br>Marca impressora: ' + marcaImp.value + '<br>Modelo impressora: ' + modelImp.value + '<br><br>Certificado para emissão de NFe <br>Caminho do certificado: ' + certCaminhoNfe.value + '<br>Senha: ' + certPassNfe.value + '<br><br>CNPJ da loja solicitante: ' + cnpjSolicitante.value + '<br>Responsável pela abertura do chamado: ' + nomeSolicitante.value + '<br>Versão do sistema: ' + versao.value + '<br>Telefone para contato (solicitar ao cliente): ' + telefone.value + '<br><br>Conexões: ' + conexao.value;
+							//p.appendChild(elementTwo);
+							} else {
+								return alert("Por favor, preencha todos os campos referente ao cadastro do SAT.");
+							}
+						}
+					} else {
+						if(marcaSat.value != "" && modelSat.value != "" && codeSat.value != "" ){
+							elementTwo.innerHTML = '<br><br>Caixa? ' + caixa.value + '<br><br>Documento fiscal: ' + docFiscal.value + '<br>Equipamento novo ou apenas reinstalação? ' + satDoc.value + '<br><br>Marca: ' + marcaSat.value + '<br>Modelo: ' + modelSat.value + '<br>Código de ativação: ' + codeSat.value + '<br><br>Marca impressora: ' + marcaImp.value + '<br>Modelo impressora: ' + modelImp.value + '<br><br>Certificado para emissão de NFe: <br>Caminho do certificado: ' + certCaminhoNfe.value + '<br>Senha: ' + certPassNfe.value + '<br><br>CNPJ da loja solicitante: ' + cnpjSolicitante.value + '<br>Responsável pela abertura do chamado: ' + nomeSolicitante.value + '<br>Versão do sistema: ' + versao.value + '<br>Telefone para contato (solicitar ao cliente): ' + telefone.value + '<br><br>Conexões: ' + conexao.value;
+							} else {
+								return alert("Por favor, preencha todos os campos referente ao cadastro do SAT.");
+								}
+						}
+						
+					}
+					
+				}
+			}
+	
+	p.appendChild(elementTexto1).style.backgroundColor = '#FA8072';
+	p.appendChild(elementTitulo);
+	p.appendChild(elementTexto2).style.backgroundColor = '#FA8072';
+	p.appendChild(elementTexto);
+	p.appendChild(elementOne);
+	p.appendChild(elementTwo);
+	
+}
+	
+//fim function				
+			
+
+</script>
+
+<style>
+
+
+	.titulo {
+		background: #87CEEB;
+		bottom: 0;
+		width: 100%;
+		text-align: center;
+		height: 40px;
+	}
+
+	.fixarRodape {
+		background: #87CEEB;
+		bottom: 0;
+		position: fixed;
+		width: 100%;
+		text-align: center;
+		position: relative;
+		display: inline;
+		height: 40px;
+	}
+
+	.body{
+		background-color: aquamarine;
+	}
+</style>
+
+</html>
